@@ -5,6 +5,6 @@ const nextConfig = {
     appDir: true,
     serverActions: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
