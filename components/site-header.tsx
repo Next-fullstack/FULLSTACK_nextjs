@@ -44,6 +44,9 @@ export function SiteHeader() {
               </div>
             </Link>
             <ThemeToggle />
+            <Link className={buttonVariants()} href='/'>
+              Logout
+            </Link>
           </nav>
         </div>
       </div>

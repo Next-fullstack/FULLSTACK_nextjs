@@ -45,7 +45,7 @@ const SignInForm = () => {
         if (signInData?.error) {
             console.log(signInData.error);
         } else {
-            router.push('/');
+            router.push('/dashboard/todo');
         }
     };
 

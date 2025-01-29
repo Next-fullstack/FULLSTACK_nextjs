@@ -11,8 +11,8 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: "https://twitter.com/shakibdshy",
-    github: "https://github.com/shakibdshy",
+    twitter: "/dashboard/todo",
+    github: "/dashboard/todo",
     docs: "/",
   },
 }
