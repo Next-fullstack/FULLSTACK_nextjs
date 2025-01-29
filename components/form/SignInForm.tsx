@@ -14,6 +14,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const FormSchema = z.object({
     email: z.string().min(1, 'Email is required').email('Invalid email'),
@@ -24,6 +26,7 @@ const FormSchema = z.object({
 });
 
 const SignInForm = () => {
+    const router = useRouter();
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -32,8 +35,18 @@ const SignInForm = () => {
         },
     });
 
-    const onSubmit = (values: z.infer<typeof FormSchema>) => {
-        console.log(values);
+    const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+        const signInData = await signIn('credentials', {
+            email: values.email,
+            password: values.password,
+            redirect: false,
+        });
+
+        if (signInData?.error) {
+            console.log(signInData.error);
+        } else {
+            router.push('/');
+        }
     };
 
     return (
