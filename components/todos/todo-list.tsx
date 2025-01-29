@@ -34,7 +34,8 @@ function TodoList({ todo }: TodoProps) {
       <span className="ml-auto text-sm text-slate-500 peer-checked:line-through">
         {todo.updatedAt.toUTCString()}
       </span>
-      <DropdownTodo id={todo?.id} />
+      <DropdownTodo id={todo?.id} currentTitle={todo?.title} />{" "}
+      {/* Menambahkan currentTitle */}
     </li>
   );
 }
