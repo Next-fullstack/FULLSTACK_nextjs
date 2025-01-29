@@ -1,13 +1,13 @@
 // schema.prisma
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["jsonProtocol"]
 }
- 
+
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
@@ -32,11 +32,12 @@ enum Status {
 }
 
 model User {
-  id           String    @id
-  email        String    @unique
-  hash_password String
-  tasks        Task[]
-  sessions     Session[]
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
 }
 
 model Task {
@@ -45,12 +46,4 @@ model Task {
   priority Priority
   status   Status
   userId   String
-  user     User     @relation(fields: [userId], references: [id])
-}
-
-model Session {
-  id        String   @id
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  expiresAt DateTime
 }
